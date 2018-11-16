@@ -16,6 +16,9 @@ namespace Challenge_4
         {
             BadgeID = badgeID;
             List<DoorNames> doorNames;
+
+            List
+
         }
     }
 }

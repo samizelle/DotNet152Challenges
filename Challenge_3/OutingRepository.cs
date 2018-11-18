@@ -25,47 +25,19 @@ namespace Challenge_3
             var total = costPerPerson * totalEventCost;
             return total;
         }
-        /*
-        public decimal CalculateTotalCombinedEventCost()
+
+        public int ParseResponseToInt()
         {
-            decimal totalCost = 0.00m;
-            foreach (Outing outing in _outingList)
-            {
-                totalCost += outing.TotalEventCost;
-            }
-            return totalCost;
-        }*/
+            string inputAsString = Console.ReadLine();
+            int input = int.Parse(inputAsString);
+            return input;
+        }
 
-        /*public decimal CalculateTotalCostsGolf()
+        public decimal ParseResponseToDecimal()
         {
-            decimal totalCostGolf = 0.00m;
-            foreach (Outing outing in _outingList)
-            {
-                if (outing.OutingType == "Golf")
-                {
-                    totalCostGolf += outing.TotalEventCost;
-                }
-                return totalCostGolf;
-            }
-        }*/
-
-        /*            decimal totalCostBowling = 0.00m;
-            decimal totalCostAmusementPark = 0.00m;
-            decimal totalCostConcert = 0.00m;
-
-
-                else if (outing.OutingType == "Bowling")
-                {
-                    totalCostBowling += outing.TotalEventCost;
-                }
-                else if (outing.OutingType == "AmusementPark")
-                {
-                    totalCostAmusementPark += outing.TotalEventCost;
-                }
-                else if (outing.OutingType == "Concert")
-                {
-                    totalCostConcert += outing.TotalEventCost;
-                }*/
-
+            string inputAsString = Console.ReadLine();
+            decimal decimalInput = decimal.Parse(inputAsString);
+            return decimalInput;
+        }
     }
 }

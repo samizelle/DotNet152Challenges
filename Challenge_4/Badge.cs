@@ -9,16 +9,13 @@ namespace Challenge_4
     public class Badge
     {
         public int BadgeID { get; set; }
-        public string DoorNames { get; set; }
+        public string DoorAccess { get; set; }
 
         public Badge() { }
-        public Badge(int badgeID, string doorNames)
+        public Badge(int badgeID, string doorAccess)
         {
             BadgeID = badgeID;
-            List<DoorNames> doorNames;
-
-            List
-
+            DoorAccess = doorAccess;
         }
     }
 }

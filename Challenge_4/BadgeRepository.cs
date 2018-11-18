@@ -10,10 +10,28 @@ namespace Challenge_4
     {
         List<Badge> _badgeList = new List<Badge>();
 
-        public List<Badge> GetBadges()
+        public void AddBadgeToList(Badge badge)
+        {
+            _badgeList.Add(badge);
+        }
+        
+        public List<Badge> GetBadge()
         {
             return _badgeList;
         }
+
+        public int ParseResponseToInt()
+        {
+            string inputAsString = Console.ReadLine();
+            int input = int.Parse(inputAsString);
+            return input;
+        }
+
+        public void DeleteBadgeID(Badge badge)
+        {
+            _badgeList.Remove(badge);
+        }
+
     }
 
 

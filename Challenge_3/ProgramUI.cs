@@ -37,12 +37,13 @@ namespace Challenge_3
                     "3 View Total Costs by Event Type\n\t" +
                     "4 View Total Costs\n\t" +
                     "5 Exit");
-                int input = ParseResponseToInt();
+                int input = outingRepo.ParseResponseToInt();
 
                 switch (input)
                 {
                     case 1:
-                        AddOutingToList();
+                        var outing = CreateNewOuting();
+                        outingRepo.AddOutingToList(outing);
                         isRunning = true;
                         break;
                     case 2:
@@ -67,7 +68,7 @@ namespace Challenge_3
             }
         }
 
-        public void AddOutingToList()
+        public Outing CreateNewOuting()
         {
             string outingType;
 
@@ -93,30 +94,17 @@ namespace Challenge_3
                     break;
             }
             Console.WriteLine("How many people attended this event?");
-            int numberOfAttendees = ParseResponseToInt();
+            int numberOfAttendees = outingRepo.ParseResponseToInt();
             Console.WriteLine("What was the date of the event?");
             string dateOfEvent = Console.ReadLine();
             Console.WriteLine("What was the cost per person? (0.00)");
-            decimal costPerPerson = ParseResponseToDecimal();
+            decimal costPerPerson = outingRepo.ParseResponseToDecimal();
             decimal totalEventCost = costPerPerson * numberOfAttendees;
             Outing newOuting = new Outing(outingType, numberOfAttendees, dateOfEvent, costPerPerson,
                 totalEventCost);
-            outingRepo.AddOutingToList(newOuting);
+            return newOuting;
         }
 
-        public int ParseResponseToInt()
-        {
-            string inputAsString = Console.ReadLine();
-            int input = int.Parse(inputAsString);
-            return input;
-        }
-
-        public decimal ParseResponseToDecimal()
-        {
-            string inputAsString = Console.ReadLine();
-            decimal decimalInput = decimal.Parse(inputAsString);
-            return decimalInput;
-        }
         public void PrintOutingListString()
         {
             foreach (Outing outing in _outingList)

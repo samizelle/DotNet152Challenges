@@ -14,6 +14,8 @@ namespace Challenge_1
         public string MealIngredients { get; set; }
         public decimal MealPrice { get; set; }
 
+        public Menu() { }
+
         public Menu(int mealNumer, string mealName, string mealDescription, string mealIngredients, decimal mealPrice)
         {
             MealNumber = mealNumer;
@@ -21,11 +23,6 @@ namespace Challenge_1
             MealDescription = mealDescription;
             MealIngredients = mealIngredients;
             MealPrice = mealPrice;
-        }
-
-        public Menu()
-        {
-
         }
     }
 }

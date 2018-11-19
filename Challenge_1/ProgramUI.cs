@@ -37,7 +37,7 @@ namespace Challenge_1
                         addingItem = false;
                         Console.WriteLine("Thank you");
                         break;
-                    default:  //oops, try again
+                    default:  
                         Console.WriteLine("Invalid response, try again");
                         break;
                 }
@@ -66,7 +66,6 @@ namespace Challenge_1
 
         private void PrintMenuList()
         {
-            //Console.Clear();
             Console.WriteLine("Here is your menu list:");
             foreach (Menu content in _menuRepo.GetListItems())
             {

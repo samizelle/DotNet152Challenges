@@ -48,8 +48,6 @@ namespace Challenge_2
             claimRepo.AddClaimToQueue(claimTwo);
             claimRepo.AddClaimToQueue(claimThree);
 
-
-
             bool isRunning = true;
             while (isRunning)
             {
@@ -151,6 +149,5 @@ namespace Challenge_2
 
             claimRepo.AddClaimToQueue(newClaim);
         }
-
     }
 }

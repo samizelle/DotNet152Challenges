@@ -8,16 +8,27 @@ namespace Challenge_4
 {
     public class BadgeRepository
     {
-        List<Badge> _badgeList = new List<Badge>();
+        List<string> _doorList = new List<string>();
+        Dictionary<int, List<string>> badgeDictionary = new Dictionary<int, List<string>>();
 
-        public void AddBadgeToList(Badge badge)
+        public void AddBadgeToList(Badge doors)
         {
-            _badgeList.Add(badge);
+            badgeDictionary.Add(doors.BadgeID, doors.DoorAccess);
         }
-        
-        public List<Badge> GetBadge()
+
+        public void UpdateExistingBadge(Badge doors)
         {
-            return _badgeList;
+            badgeDictionary[doors.BadgeID] = doors.DoorAccess;
+        }
+
+        public void DeleteBadgeID(int number)
+        {
+            badgeDictionary.Remove(number);
+        }
+
+        public Dictionary<int, List<string>> GetBadge()
+        {
+            return badgeDictionary;
         }
 
         public int ParseResponseToInt()
@@ -26,13 +37,5 @@ namespace Challenge_4
             int input = int.Parse(inputAsString);
             return input;
         }
-
-        public void DeleteBadgeID(Badge badge)
-        {
-            _badgeList.Remove(badge);
-        }
-
     }
-
-
 }

@@ -25,5 +25,4 @@ namespace Challenge_1
             _menuList.Remove(content);
         }
     }
-
 }

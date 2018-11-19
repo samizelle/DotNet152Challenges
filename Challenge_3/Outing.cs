@@ -15,6 +15,7 @@ namespace Challenge_3
         public decimal TotalEventCost { get; set; }
 
         public Outing() { }
+
         public Outing(string outingType, int numberOfAttendees, string dateOfEvent, decimal costPerPerson, decimal totalEventCost)
         {
             OutingType = outingType;

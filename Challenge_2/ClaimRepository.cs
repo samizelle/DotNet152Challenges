@@ -19,6 +19,5 @@ namespace Challenge_2
         {
             return _claimsQueue;
         }
-
     }
 }

@@ -17,6 +17,7 @@ namespace Challenge_2
         public bool IsValid { get; set; }
 
         public Claim() { }
+
         public Claim(int claimID, string claimType, string description, decimal claimAmount, string dateOfIncident, string dateOfClaim, bool isValid)
         {
             ClaimID = claimID;

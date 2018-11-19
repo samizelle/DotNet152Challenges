@@ -9,17 +9,12 @@ namespace Challenge_4
     public class ProgramUI
     {
         BadgeRepository badgeRepo = new BadgeRepository();
-        List<Badge> _badgeList;
-
-        // Dictionary<int, Badge> myDictionary = new Dictionary<int, Badge>();
 
         public void Run()
         {
-            //myDictionary.Add ();
-            _badgeList = badgeRepo.GetBadge();
-            Badge badgeOne = new Badge(1, "A1, C4, D2");
-            Badge badgeTwo = new Badge(2, "A1, C2, C3");
-            Badge badgeThree = new Badge(3, "A2, B1, B3, D1");
+            Badge badgeOne = new Badge { BadgeID = 1, DoorAccess = new List<string>() { "A1", "C4", "D2" } };
+            Badge badgeTwo = new Badge { BadgeID = 2, DoorAccess = new List<string>() { "A1", "C2", "C3" } };
+            Badge badgeThree = new Badge { BadgeID = 3, DoorAccess = new List<string>() { "A2", "B1", "B3", "D1" } };
 
             badgeRepo.AddBadgeToList(badgeOne);
             badgeRepo.AddBadgeToList(badgeTwo);
@@ -40,8 +35,7 @@ namespace Challenge_4
                 switch (input)
                 {
                     case 1:
-                        var newBadge = CreateNewBadge();
-                        badgeRepo.AddBadgeToList(newBadge);
+                        CreateNewBadge();
                         break;
                     case 2:
                         UpdateExistingBadge();
@@ -61,46 +55,147 @@ namespace Challenge_4
             }
         }
 
-        public Badge CreateNewBadge()
+        public void CreateNewBadge()
         {
-            Console.WriteLine("Here is the list of current badges:\n");
+            List<string> doors = new List<string>();
             ViewBadgeAccessList();
             Console.WriteLine("Enter a new BadgeID:");
             int badgeID = badgeRepo.ParseResponseToInt();
-            Console.WriteLine("What doors will this badge have access to? (1, 2, 3)");
-            string doorAccess = Console.ReadLine();
-            Badge newBadge = new Badge(badgeID, doorAccess);
-            return newBadge;
+            Console.WriteLine("What door will this badge have access to?");
+            string door = Console.ReadLine();
+            doors.Add(door);
+            bool isRunning = true;
+            while (isRunning)
+            {
+                Console.WriteLine("Would you like to add another door to this badge? y/n");
+                string response = Console.ReadLine().ToLower();
+                if (response == "y")
+                {
+                    isRunning = true;
+                    Console.WriteLine("Enter another door for this badge");
+                    string doorTwo = Console.ReadLine();
+                    doors.Add(doorTwo);
+                }
+                else
+                {
+                    isRunning = false;
+                    break;
+                }
+            }
+            Badge newBadge = new Badge(badgeID, doors);
+            badgeRepo.AddBadgeToList(newBadge);
         }
 
         public void UpdateExistingBadge()
         {
-
-        }
-
-        public void DeleteBadgeID()
-        {
-            Console.WriteLine("Here is the list of current badges:\n");
             ViewBadgeAccessList();
-            Console.WriteLine("Which BadgeID would you like to delete?");
+            Console.WriteLine("Which BadgeID would you like to update?");
             int badgeID = badgeRepo.ParseResponseToInt();
-            foreach(Badge badge in badgeRepo.GetBadge())
+            Dictionary<int, List<string>> badges = badgeRepo.GetBadge();
+            List<string> doors = badges[badgeID];
+            bool isRunning = true;
+            while (isRunning)
             {
-                if (badgeID == badge.BadgeID)
+                Console.WriteLine("Would you like to delete a door from this badge? y/n");
+                string response = Console.ReadLine().ToLower();
+                if (response == "y")
                 {
-                    badgeRepo.DeleteBadgeID(badge);
-                    break;
+                    Console.WriteLine("Enter the door to delete:");
+                    string door = Console.ReadLine();
+                    doors.Remove(door);
+                }
+                else
+                {
+                    Console.WriteLine("Would you like to add a door to this badge? y/n");
+                    string responseThree = Console.ReadLine().ToLower();
+                    if (responseThree == "y")
+                    {
+                        Console.WriteLine("Enter the door to add");
+                        string doorThree = Console.ReadLine();
+                        doors.Add(doorThree);
+                    }
+                    else
+                    {
+                        isRunning = false;
+                        break;
+                    }
+                    Console.WriteLine("Would you like to add another door to this badge? y/n");
+                    string responseFour = Console.ReadLine();
+                    if (responseFour == "y")
+                    {
+                        Console.WriteLine("Enter the door to add");
+                        string doorFour = Console.ReadLine();
+                        doors.Add(doorFour);
+                    }
+                    else
+                    {
+                        isRunning = false;
+                        break;
+                    }
+                }
+                Console.WriteLine("Would you like to delete another door? y/n");
+                string responseTwo = Console.ReadLine().ToLower();
+                if (responseTwo == "y")
+                {
+                    isRunning = true;
+                    Console.WriteLine("Enter the door to delete");
+                    string doorTwo = Console.ReadLine();
+                    doors.Remove(doorTwo);
+                }
+                else
+                {
+                    Console.WriteLine("Would you like to add a door to this badge? y/n");
+                    string responseThree = Console.ReadLine().ToLower();
+                    if (responseThree == "y")
+                    {
+                        Console.WriteLine("Enter the door to add");
+                        string doorThree = Console.ReadLine();
+                        doors.Add(doorThree);
+                    }
+                    else
+                    {
+                        isRunning = false;
+                        break;
+                    }
+                    Console.WriteLine("Would you like to add another door to this badge? y/n");
+                    string responseFour = Console.ReadLine();
+                    if (responseFour == "y")
+                    {
+                        Console.WriteLine("Enter the door to add");
+                        string doorFour = Console.ReadLine();
+                        doors.Add(doorFour);
+                    }
+                    else
+                    {
+                        isRunning = false;
+                        break;
+                    }
+                Badge newBadge = new Badge(badgeID, doors);
+                badgeRepo.UpdateExistingBadge(newBadge);
                 }
             }
         }
 
-        public void ViewBadgeAccessList()
+        public void DeleteBadgeID()
         {
-            foreach (Badge badge in _badgeList)
-            {
-                Console.WriteLine($"Badge {badge.BadgeID} has access to Doors {badge.DoorAccess}");
-            }
+            ViewBadgeAccessList();
+            Console.WriteLine("Which BadgeID would you like to delete?");
+            int badgeID = badgeRepo.ParseResponseToInt();
+            badgeRepo.DeleteBadgeID(badgeID);
         }
 
+        public void ViewBadgeAccessList()
+        {
+            Dictionary<int, List<string>> badges = badgeRepo.GetBadge();
+            Console.WriteLine("Here is the list of current badges:\n");
+            foreach (KeyValuePair<int, List<string>> badge in badges)
+            {
+                Console.WriteLine("BadgeID {0} has access to Doors:", badge.Key);
+                foreach (string doors in badge.Value)
+                {
+                    Console.WriteLine("\t{0}", doors);
+                }
+            }
+        }
     }
 }

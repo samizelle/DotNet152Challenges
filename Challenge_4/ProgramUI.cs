@@ -96,83 +96,33 @@ namespace Challenge_4
             bool isRunning = true;
             while (isRunning)
             {
-                Console.WriteLine("Would you like to delete a door from this badge? y/n");
-                string response = Console.ReadLine().ToLower();
-                if (response == "y")
+                Console.WriteLine("What changes would you like to make to this badge?\n\t" +
+                    "1. Add a door\n\t" +
+                    "2. Delete a door\n\t" +
+                    "3. Exit");
+
+                int input = badgeRepo.ParseResponseToInt();
+                switch (input)
                 {
-                    Console.WriteLine("Enter the door to delete:");
-                    string door = Console.ReadLine();
-                    doors.Remove(door);
+                    case 1:
+                        Console.WriteLine("Enter the door to add");
+                        string addDoor = Console.ReadLine();
+                        doors.Add(addDoor);
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter the door to delete:");
+                        string deleteDoor = Console.ReadLine();
+                        doors.Remove(deleteDoor);
+                        break;
+                    case 3:
+                        isRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Improper response");
+                        break;
                 }
-                else
-                {
-                    Console.WriteLine("Would you like to add a door to this badge? y/n");
-                    string responseThree = Console.ReadLine().ToLower();
-                    if (responseThree == "y")
-                    {
-                        Console.WriteLine("Enter the door to add");
-                        string doorThree = Console.ReadLine();
-                        doors.Add(doorThree);
-                    }
-                    else
-                    {
-                        isRunning = false;
-                        break;
-                    }
-                    Console.WriteLine("Would you like to add another door to this badge? y/n");
-                    string responseFour = Console.ReadLine();
-                    if (responseFour == "y")
-                    {
-                        Console.WriteLine("Enter the door to add");
-                        string doorFour = Console.ReadLine();
-                        doors.Add(doorFour);
-                    }
-                    else
-                    {
-                        isRunning = false;
-                        break;
-                    }
-                }
-                Console.WriteLine("Would you like to delete another door? y/n");
-                string responseTwo = Console.ReadLine().ToLower();
-                if (responseTwo == "y")
-                {
-                    isRunning = true;
-                    Console.WriteLine("Enter the door to delete");
-                    string doorTwo = Console.ReadLine();
-                    doors.Remove(doorTwo);
-                }
-                else
-                {
-                    Console.WriteLine("Would you like to add a door to this badge? y/n");
-                    string responseThree = Console.ReadLine().ToLower();
-                    if (responseThree == "y")
-                    {
-                        Console.WriteLine("Enter the door to add");
-                        string doorThree = Console.ReadLine();
-                        doors.Add(doorThree);
-                    }
-                    else
-                    {
-                        isRunning = false;
-                        break;
-                    }
-                    Console.WriteLine("Would you like to add another door to this badge? y/n");
-                    string responseFour = Console.ReadLine();
-                    if (responseFour == "y")
-                    {
-                        Console.WriteLine("Enter the door to add");
-                        string doorFour = Console.ReadLine();
-                        doors.Add(doorFour);
-                    }
-                    else
-                    {
-                        isRunning = false;
-                        break;
-                    }
                 Badge newBadge = new Badge(badgeID, doors);
                 badgeRepo.UpdateExistingBadge(newBadge);
-                }
             }
         }
 
